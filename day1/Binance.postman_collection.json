@@ -1,0 +1,148 @@
+{
+	"info": {
+		"_postman_id": "278ec165-d611-4a8c-8b71-7e056076378b",
+		"name": "Binance",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "761969"
+	},
+	"item": [
+		{
+			"name": "klines data with 1 minute interval",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{binanceBaseUrl}}/v3/klines?symbol=BTCUSDT&interval=1m&limit=1000",
+					"host": [
+						"{{binanceBaseUrl}}"
+					],
+					"path": [
+						"v3",
+						"klines"
+					],
+					"query": [
+						{
+							"key": "timestamp",
+							"value": "1663036611",
+							"disabled": true
+						},
+						{
+							"key": "signature",
+							"value": "{{signature}}",
+							"disabled": true
+						},
+						{
+							"key": "symbol",
+							"value": "BTCUSDT"
+						},
+						{
+							"key": "interval",
+							"value": "1m"
+						},
+						{
+							"key": "limit",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get BTCUSDT klines data with 1 day interval, start from 1 September 2022 to 7 September 2022 (UTC)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{binanceBaseUrl}}/v3/klines?symbol=BTCUSDT&interval=1d&startTime=1661940000&endTime=1662458400",
+					"host": [
+						"{{binanceBaseUrl}}"
+					],
+					"path": [
+						"v3",
+						"klines"
+					],
+					"query": [
+						{
+							"key": "timestamp",
+							"value": "1663036611",
+							"disabled": true
+						},
+						{
+							"key": "signature",
+							"value": "{{signature}}",
+							"disabled": true
+						},
+						{
+							"key": "symbol",
+							"value": "BTCUSDT"
+						},
+						{
+							"key": "interval",
+							"value": "1d"
+						},
+						{
+							"key": "startTime",
+							"value": "1661940000"
+						},
+						{
+							"key": "endTime",
+							"value": "1662458400"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Account Info",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"timestamp\", Date.now() - (1000 * 13));",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-MBX-APIKEY",
+						"value": "{{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{binanceBaseUrl}}/v3/account?timestamp={{timestamp}}&signature={{signature}}&recvWindow=60000",
+					"host": [
+						"{{binanceBaseUrl}}"
+					],
+					"path": [
+						"v3",
+						"account"
+					],
+					"query": [
+						{
+							"key": "timestamp",
+							"value": "{{timestamp}}"
+						},
+						{
+							"key": "signature",
+							"value": "{{signature}}"
+						},
+						{
+							"key": "recvWindow",
+							"value": "60000"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
